@@ -15,7 +15,7 @@ jobs:
   
       - uses: microsoft/variable-substitution@v1 
         with:
-            files: 'twatter-API-gateway/appsettings.json'
+            files: 'appsettings.json'
         env:
             UserApiUrl: "${{ secrets.USWE_URL }}"
             PostApiUrl: "${{ secrets.POST_URL }}"
