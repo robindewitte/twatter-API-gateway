@@ -6,8 +6,8 @@ EXPOSE 8123
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["twatter-API-gateway/twatter-API-gateway.csproj", "twatter-API-gateway/"]
-RUN dotnet restore "twatter-API-gateway/twatter-API-gateway.csproj"
+COPY ["twatter-API-gateway.csproj", "twatter-API-gateway/"]
+RUN dotnet restore "twatter-API-gateway.csproj"
 COPY . .
 WORKDIR "/src/twatter-API-gateway"
 RUN dotnet build "twatter-API-gateway.csproj" -c Release -o /app/build
