@@ -24,7 +24,7 @@ namespace twatter_API_gateway.Controllers
         [Route("login")]
         public async Task<ActionResult<string>> Login(LoginDTO loginDTO)
         {
-            IFlurlResponse response = await $"https://localhost:5003/api/user/login".PostJsonAsync(loginDTO);
+            IFlurlResponse response = await $"{Constants.UserApiUrl}/api/user/login".PostJsonAsync(loginDTO);
 
             if (response.StatusCode >= 500)
             {
@@ -53,7 +53,7 @@ namespace twatter_API_gateway.Controllers
         [Route("register")]
         public async Task<ActionResult<RegisterResponseDTO>> Register(RegisterDTO registerDTO)
         {
-            IFlurlResponse response = await $"https://localhost:5003/api/user/register".PostJsonAsync(registerDTO);
+            IFlurlResponse response = await $"{Constants.UserApiUrl}/api/user/register".PostJsonAsync(registerDTO);
             if (response.StatusCode >= 500)
             {
                 return StatusCode(500);

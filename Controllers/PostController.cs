@@ -24,7 +24,7 @@ namespace twatter_API_gateway.Controllers
         [Route("postmessage")]
         public async Task<ActionResult<string>> PostMessage(PostDTO postDTO)
         {
-            IFlurlResponse response = await $"https://localhost:5005/api/post/postmessage".PostJsonAsync(postDTO);
+            IFlurlResponse response = await $"{Constants.PostApiUrl}/api/post/postmessage".PostJsonAsync(postDTO);
             if (response.StatusCode >= 500)
             {
                 return StatusCode(500);
