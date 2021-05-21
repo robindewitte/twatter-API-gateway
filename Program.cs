@@ -21,7 +21,6 @@ namespace twatter_API_gateway
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                    .UseSetting("https_port", "8123")
                      .UseUrls("http://*:8123");
                 });
     }
