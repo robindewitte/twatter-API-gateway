@@ -8,10 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="dotnet-framework-sonarscanner" Version="5.2.0" />
     <PackageReference Include="Flurl" Version="3.0.1" />
     <PackageReference Include="Flurl.Http" Version="3.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.23.0.32424">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
