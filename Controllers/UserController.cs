@@ -51,7 +51,7 @@ namespace twatter_API_gateway.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("register")]
-        public async Task<ActionResult<RegisterResponseDTO>> Register(RegisterDTO registerDTO)
+        public async Task<ActionResult<string>> Register(RegisterDTO registerDTO)
         {
             IFlurlResponse response = await $"{Constants.UserApiUrl}/api/user/register".PostJsonAsync(registerDTO);
             if (response.StatusCode >= 500)
@@ -64,8 +64,8 @@ namespace twatter_API_gateway.Controllers
             }
             else
             {
-                RegisterResponseDTO returnValue = await response.GetJsonAsync<RegisterResponseDTO>();
-                return returnValue;
+               string answer = await response.GetStringAsync();
+                return answer;
             }
         }
     }

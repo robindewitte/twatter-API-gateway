@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using twatter_API_gateway.DTO;
 using twatter_API_gateway.Helper;
 
@@ -45,9 +46,9 @@ namespace twatter_API_gateway.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("getusermessages/{username}")]
-        public async Task<ActionResult<List<PostDTO>>> GetUserMessages(string username)
+        public async Task<ActionResult<ICollection<PostDTO>>> GetUserMessages(string username)
         {
-            IFlurlResponse response = await $"{Constants.PostApiUrl}/api/post/getusermessages/{username}".GetJsonAsync();
+            IFlurlResponse response = await $"{Constants.PostApiUrl}/api/post/getusermessages/{username}".GetAsync();
             if (response.StatusCode >= 500)
             {
                 return StatusCode(500);
@@ -58,8 +59,8 @@ namespace twatter_API_gateway.Controllers
             }
             else
             {
-                List<PostDTO> answer = await response.GetJsonAsync<List<PostDTO>>();
-                return answer;
+                ICollection<PostDTO> answer = await response.GetJsonAsync<ICollection<PostDTO>>();
+                return Ok(answer);
             }
         }
 
@@ -68,9 +69,9 @@ namespace twatter_API_gateway.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("getmessages/{searchterm}")]
-        public async Task<ActionResult<List<PostDTO>>> GetMessages(string searchterm)
+        public async Task<ActionResult<ICollection<PostDTO>>> GetMessages(string searchterm)
         {
-            IFlurlResponse response = await $"{Constants.PostApiUrl}/api/post/getmessages/{searchterm}".GetJsonAsync();
+            IFlurlResponse response = await $"{Constants.PostApiUrl}/api/post/getmessages/{searchterm}".GetAsync();
             if (response.StatusCode >= 500)
             {
                 return StatusCode(500);
@@ -81,8 +82,8 @@ namespace twatter_API_gateway.Controllers
             }
             else
             {
-                List<PostDTO> answer = await response.GetJsonAsync<List<PostDTO>>();
-                return answer;
+                ICollection<PostDTO> answer = await response.GetJsonAsync<ICollection<PostDTO>>();
+                return Ok(answer);
             }
         }
     }

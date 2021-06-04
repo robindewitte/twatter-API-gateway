@@ -24,6 +24,7 @@ namespace twatter_API_gateway.DTO
         {
             this.Username = username;
             this.PostMessage = postMessage;
+            this.HashTag = hashtag;
         }
         #endregion
 

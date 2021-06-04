@@ -20,8 +20,7 @@ namespace twatter_API_gateway
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>()
-                     .UseUrls("http://*:8123");
+                    webBuilder.UseStartup<Startup>();
                 });
     }
 }

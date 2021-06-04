@@ -32,6 +32,7 @@ namespace twatter_API_gateway
         public void ConfigureServices(IServiceCollection services)
         {
             Constants.UserApiUrl = Configuration.GetValue<string>("UserApiUrl");
+            Constants.PostApiUrl = Configuration.GetValue<string>("PostApiUrl");
             services.AddControllers();
 
             services.AddAuthentication(x =>
