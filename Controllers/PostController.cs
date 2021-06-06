@@ -25,20 +25,30 @@ namespace twatter_API_gateway.Controllers
         [Route("postmessage")]
         public async Task<ActionResult<string>> PostMessage(PostDTO postDTO)
         {
-            IFlurlResponse response = await $"{Constants.PostApiUrl}/api/post/postmessage".PostJsonAsync(postDTO);
-            if (response.StatusCode >= 500)
+            Microsoft.Extensions.Primitives.StringValues token;
+            bool getmeToken = Request.Headers.TryGetValue("Authorization", out token);
+            if (getmeToken)
             {
-                return StatusCode(500);
-            }
-            else if (response.StatusCode >= 400)
-            {
-                return StatusCode(400);
+                IFlurlResponse response = await $"{Constants.PostApiUrl}/api/post/postmessage".WithHeader("Authorization", token).PostJsonAsync(postDTO);
+                if (response.StatusCode >= 500)
+                {
+                    return StatusCode(500);
+                }
+                else if (response.StatusCode >= 400)
+                {
+                    return StatusCode(400);
+                }
+                else
+                {
+                    string answer = await response.GetStringAsync();
+                    return answer;
+                }
             }
             else
             {
-                string answer = await response.GetStringAsync();
-                return answer;
+                return StatusCode(500);
             }
+         
         }
 
         [HttpGet]
@@ -48,20 +58,30 @@ namespace twatter_API_gateway.Controllers
         [Route("getusermessages/{username}")]
         public async Task<ActionResult<ICollection<PostDTO>>> GetUserMessages(string username)
         {
-            IFlurlResponse response = await $"{Constants.PostApiUrl}/api/post/getusermessages/{username}".GetAsync();
-            if (response.StatusCode >= 500)
+            Microsoft.Extensions.Primitives.StringValues token;
+            bool getmeToken = Request.Headers.TryGetValue("Authorization", out token);
+            if (getmeToken)
             {
-                return StatusCode(500);
-            }
-            else if (response.StatusCode >= 400)
-            {
-                return StatusCode(400);
+                IFlurlResponse response = await $"{Constants.PostApiUrl}/api/post/getusermessages/{username}".WithHeader("Authorization", token).GetAsync();
+                if (response.StatusCode >= 500)
+                {
+                    return StatusCode(500);
+                }
+                else if (response.StatusCode >= 400)
+                {
+                    return StatusCode(400);
+                }
+                else
+                {
+                    ICollection<PostDTO> answer = await response.GetJsonAsync<ICollection<PostDTO>>();
+                    return Ok(answer);
+                }
             }
             else
             {
-                ICollection<PostDTO> answer = await response.GetJsonAsync<ICollection<PostDTO>>();
-                return Ok(answer);
+                return StatusCode(500);
             }
+          
         }
 
         [HttpGet]
@@ -71,20 +91,30 @@ namespace twatter_API_gateway.Controllers
         [Route("getmessages/{searchterm}")]
         public async Task<ActionResult<ICollection<PostDTO>>> GetMessages(string searchterm)
         {
-            IFlurlResponse response = await $"{Constants.PostApiUrl}/api/post/getmessages/{searchterm}".GetAsync();
-            if (response.StatusCode >= 500)
+            Microsoft.Extensions.Primitives.StringValues token;
+            bool getmeToken = Request.Headers.TryGetValue("Authorization", out token);
+            if (getmeToken)
             {
-                return StatusCode(500);
-            }
-            else if (response.StatusCode >= 400)
-            {
-                return StatusCode(400);
+                IFlurlResponse response = await $"{Constants.PostApiUrl}/api/post/getmessages/{searchterm}".WithHeader("Authorization", token).GetAsync();
+                if (response.StatusCode >= 500)
+                {
+                    return StatusCode(500);
+                }
+                else if (response.StatusCode >= 400)
+                {
+                    return StatusCode(400);
+                }
+                else
+                {
+                    ICollection<PostDTO> answer = await response.GetJsonAsync<ICollection<PostDTO>>();
+                    return Ok(answer);
+                }
             }
             else
             {
-                ICollection<PostDTO> answer = await response.GetJsonAsync<ICollection<PostDTO>>();
-                return Ok(answer);
+                return StatusCode(500);
             }
+           
         }
     }
 }
