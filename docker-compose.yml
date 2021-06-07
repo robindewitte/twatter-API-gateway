@@ -2,8 +2,8 @@ version: "3.7"
 services:
     pkg:
         build:
-            context: .
-            dockerfile: Dockerfile.original
+           context: .
+           dockerfile: Dockerfile.original
         container_name: gateway
         ports:
             - "0.0.0.0:8123:8123"
