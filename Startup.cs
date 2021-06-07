@@ -1,3 +1,4 @@
+using Flurl.Http;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -70,6 +71,7 @@ namespace twatter_API_gateway
                           .AllowAnyOrigin();
                       });
             });
+            FlurlHttp.Configure(settings => settings.AllowedHttpStatusRange = "400-504,6xx");
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "twatter_API_gateway", Version = "v1" });
@@ -97,7 +99,25 @@ namespace twatter_API_gateway
             {
                 endpoints.MapControllers();
             });
-        
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger(c =>
+            {
+                c.SerializeAsV2 = true;
+            });
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API-Gateway");
+                // Serve the swagger UI at the app's root
+                c.RoutePrefix = string.Empty;
+            });
+
         }
     }
 }
