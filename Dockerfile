@@ -5,6 +5,8 @@ WORKDIR /app
 EXPOSE 8123
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+ENV ASPNETCORE_ENVIRONMENT="Production"
+ENV ENVIRONMENT="Production"
 WORKDIR /src
 COPY ["twatter-API-gateway.csproj", ""]
 RUN dotnet restore "./twatter-API-gateway.csproj"
