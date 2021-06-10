@@ -17,8 +17,8 @@ jobs:
         with:
             files: 'appsettings.json'
         env:
-            UserApiUrl: "${{ secrets.KUBE_USER_URL }}"
-            PostApiUrl: "${{ secrets.KUBE_POST_URL }}"
+            UserApiUrl: "${{ secrets.USER_URL }}"
+            PostApiUrl: "${{ secrets.POST_URL }}"
           
       - name: Push to Docker Hub
         uses: docker/build-push-action@v1
