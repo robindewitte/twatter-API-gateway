@@ -19,6 +19,7 @@ jobs:
         env:
             UserApiUrl: "${{ secrets.USWE_URL }}"
             PostApiUrl: "${{ secrets.POST_URL }}"
+            MotivatieApiUrl: "${{ secrets.MOTIVATIE_URL }}"
           
       - name: Push to Docker Hub
         uses: docker/build-push-action@v1
