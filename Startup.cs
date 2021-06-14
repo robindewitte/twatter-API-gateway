@@ -37,6 +37,7 @@ namespace twatter_API_gateway
             Configuration.GetSection("Kestrel"));
             Constants.UserApiUrl = Configuration.GetValue<string>("UserApiUrl");
             Constants.PostApiUrl = Configuration.GetValue<string>("PostApiUrl");
+            Constants.MotivatieApiUrl = Configuration.GetValue<string>("MotivatieApiUrl");
             services.AddControllers();
 
             services.AddAuthentication(x =>
