@@ -33,8 +33,6 @@ namespace twatter_API_gateway
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<KestrelServerOptions>(
-            Configuration.GetSection("Kestrel"));
             Constants.UserApiUrl = Configuration.GetValue<string>("UserApiUrl");
             Constants.PostApiUrl = Configuration.GetValue<string>("PostApiUrl");
             services.AddControllers();

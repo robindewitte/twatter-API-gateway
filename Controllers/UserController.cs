@@ -41,8 +41,6 @@ namespace twatter_API_gateway.Controllers
             }
         }
 
-
-
         //bekijk hoe ik de value wil doorgeven voor deze methode
 
         [AllowAnonymous]
