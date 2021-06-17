@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RabbitMQ.Client;
+using twatter_API_gateway.Messaging;
 
 namespace twatter_API_gateway.Controllers
 {
@@ -15,6 +17,25 @@ namespace twatter_API_gateway.Controllers
     public class MotivatieController : Controller
     {
 
+        private IConnection _connection;
+        private IModel _channel;
+
+        public MotivatieController()
+        {
+            InitRabbitMQ();
+        }
+        private void InitRabbitMQ()
+        {
+            var factory = new ConnectionFactory { Uri = new Uri("amqp://guest:guest@localhost:5672") };
+
+            // create connection  
+            _connection = factory.CreateConnection();
+
+            // create channel  
+            _channel = _connection.CreateModel();      
+
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -22,7 +43,8 @@ namespace twatter_API_gateway.Controllers
         [Route("motivatie")]
         public async Task<ActionResult<string>> Motivatie(MotivatieDTO motivatieDTO)
         {
-            IFlurlResponse response = await $"{Constants.MotivatieApiUrl}/api/motivatie/motivatie".PostJsonAsync(motivatieDTO);
+            QueueProducer.PublishMock(_channel, motivatieDTO.Username);
+            IFlurlResponse response = await $"{Helper.Constants.MotivatieApiUrl}/api/motivatie/motivatie".PostJsonAsync(motivatieDTO);
             if (response.StatusCode >= 500)
             {
                 return StatusCode(500);

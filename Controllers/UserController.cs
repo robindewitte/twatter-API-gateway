@@ -15,7 +15,7 @@ namespace twatter_API_gateway.Controllers
     [Route("api/user")]
     [ApiController]
     public class UserController : Controller
-    {
+    { 
         [AllowAnonymous]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -24,7 +24,7 @@ namespace twatter_API_gateway.Controllers
         [Route("login")]
         public async Task<ActionResult<string>> Login(LoginDTO loginDTO)
         {
-            IFlurlResponse response = await $"{Constants.UserApiUrl}/api/user/login".PostJsonAsync(loginDTO);
+            IFlurlResponse response = await $"{Helper.Constants.UserApiUrl}/api/user/login".PostJsonAsync(loginDTO);
 
             if (response.StatusCode >= 500)
             {
@@ -53,7 +53,7 @@ namespace twatter_API_gateway.Controllers
         [Route("register")]
         public async Task<ActionResult<string>> Register(RegisterDTO registerDTO)
         {
-            IFlurlResponse response = await $"{Constants.UserApiUrl}/api/user/register".PostJsonAsync(registerDTO);
+            IFlurlResponse response = await $"{Helper.Constants.UserApiUrl}/api/user/register".PostJsonAsync(registerDTO);
             if (response.StatusCode >= 500)
             {
                 return StatusCode(500);
