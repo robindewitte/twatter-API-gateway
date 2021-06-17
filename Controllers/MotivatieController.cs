@@ -26,6 +26,7 @@ namespace twatter_API_gateway.Controllers
         }
         private void InitRabbitMQ()
         {
+            Console.WriteLine("initiates");   
             var factory = new ConnectionFactory { Uri = new Uri("amqp://guest:guest@localhost:5672") };
 
             // create connection  

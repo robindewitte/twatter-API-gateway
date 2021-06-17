@@ -14,6 +14,7 @@ namespace twatter_API_gateway.Messaging
     {
         public static void PublishMock(IModel channel, string mockvariable)
         {
+            Console.WriteLine("Exchange wordt aangeroepen");
             channel.ExchangeDeclare("mock-direct-exchange", ExchangeType.Direct, arguments: null);
             var count = 0;
 
